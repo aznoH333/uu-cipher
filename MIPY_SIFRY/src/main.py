@@ -1,4 +1,4 @@
-from cypher.cypher_util import CypherUtil
+from cipher.cipher_util import CypherUtil
 
 
 print("hello world")
