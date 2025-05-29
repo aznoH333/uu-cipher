@@ -1,7 +1,7 @@
 from cipher.cipher_util import CipherUtil
 from cipher.probability_matrix import ProbabilityMatrix
 
-
+"""
 print("hello world")
 
 a = CipherUtil("VLZODTQHUXWSERMCFKNYIBJGP_A");
@@ -12,9 +12,11 @@ b = a.encrypt("_VOZEM_DO_NEHO_A_ZAS_MNE_BEZI_DO_CESTY__ZACHVELA_SE_TAK_KUDY_VPRA
 
 print(b)
 print(a.decrypt(b))
-
+"""
 
 # train probabilities
-#krakatit = open("./Krakatit.txt").read()
+krakatit = open("./Krakatit.txt").read()
 
-#probabilityMatrix = ProbabilityMatrix.fromText(krakatit)
+probability_matrix = ProbabilityMatrix.fromText(krakatit)
+
+print(probability_matrix.probabilities)
