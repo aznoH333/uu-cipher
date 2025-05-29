@@ -13,13 +13,13 @@ class CipherUtil:
     def encrypt(self, text):
         out = ""
         for char in text.upper():
-            out += self.DEFAULT_KEY[self.key.index(char)]
+            out += self.key[self.DEFAULT_KEY.index(char)]
         
         return out
 
     def decrypt(self, text):
         out = ""
         for char in text.upper():
-            out += self.key[self.DEFAULT_KEY.index(char)]
+            out += self.DEFAULT_KEY[self.key.index(char)]
         
         return out
