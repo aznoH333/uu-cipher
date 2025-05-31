@@ -44,9 +44,8 @@ def decrypt(key, text):
     return out
 
 def sanitize_text(text):
-    decoded = str(text.upper().replace("\n", ""))
+    decoded = str(text.upper().replace("\n", "_"))
     out = ""
-    pushedSpaceLast = False
     for i in range(0, len(decoded)):
         char = decoded[i]
             
@@ -54,16 +53,11 @@ def sanitize_text(text):
         if char in CHARACTER_CONVERION_TABLE:
             char = CHARACTER_CONVERION_TABLE[char]
             
-            
-        #dont include duplicate spaces
-        if char == '_' and pushedSpaceLast:
-            continue
 
 
         #check if is part of the alphabet
         if char in BASE_ALPHABET:
             out += char
-            pushedSpaceLast = (char == '_')
             continue
 
     return out
@@ -124,11 +118,12 @@ def create_bygram_matrix(bygrams):
 
 def make_matrix_relative(matrix):
     total_element_count = 0
-    for key in matrix.keys():
-        
-        total_element_count += matrix[key]
+    for key in matrix.keys():        
+        total_element_count += matrix[key] - 1
     for key in matrix.keys():
         matrix[key] /= total_element_count
+
+
 
     return matrix
 
@@ -139,6 +134,6 @@ def plausability(text, relative_matrix):
     outcome = 0
     for i in BASE_ALPHABET:
         for j in BASE_ALPHABET:
-            outcome += relative_matrix[i + j] * text_matrix[i + j]
+            outcome += math.log(relative_matrix[i + j]) * text_matrix[i + j]
 
     return outcome

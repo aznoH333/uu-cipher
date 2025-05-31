@@ -10,9 +10,11 @@ def break_encryption(text, probability_matrix, attempts):
 
 
 
+    current_key = key.copy()
+    current_score = plausability(decrypt(current_key, text), probability_matrix)
+
     best_key = key.copy()
     best_score = plausability(decrypt(best_key, text), probability_matrix)
-
 
     
     for iteration in range(0, attempts):
@@ -22,14 +24,17 @@ def break_encryption(text, probability_matrix, attempts):
         score = plausability(decrypt(new_key, text), probability_matrix)
 
         if score > best_score:
-            best_key = new_key
+            best_key = new_key.copy()
             best_score = score
-            key = new_key
-        elif random.uniform(0, 1) < IGNORE_CHANCE:
+
+
+        if score > current_score or random.uniform(0.0, 1.0) < IGNORE_CHANCE:
+            current_key = new_key
+            current_score = score
             key = new_key
 
         if iteration % 100 == 0:
-            print(f"decrypt progress {iteration}, score {best_score}")
+            print(f"decrypt progress {iteration}, score {best_score}, key {best_key}")
     
     return best_key
 
