@@ -33,7 +33,7 @@ class ProbabilityMatrix:
         # convert to relative matrix
         for char in BASE_ALPHABET:
             for followingChar in BASE_ALPHABET:
-                this.probabilities[char + followingChar] /= this._total_occurence_count
+                this.probabilities[char + followingChar] /= this._total_occurence_count + (len(BASE_ALPHABET) * len(BASE_ALPHABET))
 
         return this
 
@@ -58,6 +58,7 @@ class ProbabilityMatrix:
         for i in range(0, len(text) - 1):
             index = text[i] + text[i+1]
             out += self.probabilities[index]
+            # + LOG( TM_ref[i][j] ) * TM_obs[i][j]
 
         
         return out
