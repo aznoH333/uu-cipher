@@ -28,6 +28,7 @@ def break_encryption(text, probability_matrix, attempts):
             best_score = score
 
 
+
         if score > current_score or random.uniform(0.0, 1.0) < IGNORE_CHANCE:
             current_key = new_key
             current_score = score
