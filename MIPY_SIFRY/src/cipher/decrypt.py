@@ -1,17 +1,19 @@
 from cipher.cipher_util import decrypt, generate_random_key, sanitize_text, shuffle_key
 import random
 
+from cipher.probability_matrix import plausability
+
 RANDOM_ACCEPT_CHANCE = 0.01
 
 def break_encryption(text, probability_matrix, attempts):
-    text = sanitize_text(text, True)
+    text = sanitize_text(text)
     
     key = generate_random_key()
 
     best_key = key.copy()
 
     
-    best_score = probability_matrix.calculate_text_score(decrypt(key, text))
+    best_score = plausability(decrypt(key, text), probability_matrix)
 
 
     for iteration in range(0, attempts):
@@ -21,7 +23,7 @@ def break_encryption(text, probability_matrix, attempts):
         
         decrypted = decrypt(new_key, text)
 
-        score = probability_matrix.calculate_text_score(decrypted)
+        score = plausability(decrypted, probability_matrix)
 
         if score > best_score:
             best_key = key.copy()

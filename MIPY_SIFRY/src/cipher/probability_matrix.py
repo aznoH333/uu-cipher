@@ -1,5 +1,6 @@
 
 
+import math
 from cipher.cipher_util import BASE_ALPHABET, sanitize_text
 
 
@@ -8,32 +9,34 @@ class ProbabilityMatrix:
     def __init__(self):
         self.probabilities = {}
         self._total_occurence_count = 0
-
-
-        # TODO : rename files
-        # TODO : move constants to separate file
-        # TODO : save / load from file
-
+        
         # init probabilities
         for char in BASE_ALPHABET:
             for followingChar in BASE_ALPHABET:
-                self.probabilities[char + followingChar] = 1
+                self.probabilities[char + followingChar] = 0
 
 
 
-    def from_text(text, include_duplicate_spaces):
-        editedText = sanitize_text(text, include_duplicate_spaces)
+    def from_text(text):
+        editedText = sanitize_text(text)
 
         this = ProbabilityMatrix()
         
         # create absolute matrix
         for i in range(0, len(editedText) - 1):
             this._note_occurence(editedText[i], editedText[i + 1])
+        
+
+        for key in this.probabilities.keys():
+            if this.probabilities[key] == 0:
+                this.probabilities[key] = 1
+                this._total_occurence_count += 1
+
 
         # convert to relative matrix
-        for char in BASE_ALPHABET:
-            for followingChar in BASE_ALPHABET:
-                this.probabilities[char + followingChar] /= this._total_occurence_count + (len(BASE_ALPHABET) * len(BASE_ALPHABET))
+        #for char in BASE_ALPHABET:
+        #    for followingChar in BASE_ALPHABET:
+        #        this.probabilities[char + followingChar] /= this._total_occurence_count
 
         return this
 
@@ -53,13 +56,17 @@ class ProbabilityMatrix:
 
     
     
-    def calculate_text_score(self, text):
-        out = 0
-        for i in range(0, len(text) - 1):
-            index = text[i] + text[i+1]
-            out += self.probabilities[index]
-            # + LOG( TM_ref[i][j] ) * TM_obs[i][j]
 
-        
-        return out
     
+
+def plausability(text, probability_matrix):
+    original_matrix = ProbabilityMatrix.from_text(text)
+
+    output = 0
+
+    for i in BASE_ALPHABET:
+        for j in BASE_ALPHABET:
+            key = i + j
+            output += math.log(probability_matrix.probabilities[key]) * original_matrix.probabilities[key]
+    
+    return output

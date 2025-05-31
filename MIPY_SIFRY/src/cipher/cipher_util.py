@@ -1,5 +1,7 @@
+import math
 import random
 from random import randrange
+
     
 BASE_ALPHABET = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "_"]
 CHARACTER_CONVERION_TABLE = {
@@ -42,10 +44,9 @@ def decrypt(key, text):
         
     return out
 
-def sanitize_text(text, include_duplicate_spaces):
-    decoded = str(text.upper().replace("\n", ""))
+def sanitize_text(text):
+    decoded = str(text.upper().replace("\n", "_"))
     out = ""
-    pushedSpaceLast = False
     for i in range(0, len(decoded)):
         char = decoded[i]
             
@@ -53,16 +54,10 @@ def sanitize_text(text, include_duplicate_spaces):
         if char in CHARACTER_CONVERION_TABLE:
             char = CHARACTER_CONVERION_TABLE[char]
             
-            
-        #dont include duplicate spaces
-        if char == '_' and pushedSpaceLast and not include_duplicate_spaces:
-            continue
-
 
         #check if is part of the alphabet
         if char in BASE_ALPHABET:
             out += char
-            pushedSpaceLast = (char == '_')
             continue
 
     return out
@@ -91,3 +86,5 @@ def shuffle_key(key):
     key[random_2] = temp
 
     return key
+
+
