@@ -137,3 +137,15 @@ def plausability(text, relative_matrix):
             outcome += math.log(relative_matrix[i + j]) * text_matrix[i + j]
 
     return outcome
+
+
+def text_correctness(original_text, decrypted_text):
+    output = 0
+    
+    for i in range(0, len(original_text)):
+        if original_text[i] != decrypted_text[i]:
+            output += 1
+
+    output /= len(original_text)
+
+    return 1 - output

@@ -1,4 +1,4 @@
-from cipher.cipher_util import BASE_ALPHABET, create_bygram_matrix, decrypt, encrypt, generate_random_key, get_bygrams, make_matrix_relative, plausability, shuffle_key
+from cipher.cipher_util import BASE_ALPHABET, create_bygram_matrix, decrypt, encrypt, generate_random_key, get_bygrams, make_matrix_relative, plausability, shuffle_key, text_correctness
 from cipher.decrypt import break_encryption
 
 """
@@ -45,4 +45,8 @@ print(f"orig : {orig}")
 print (decrypted_key)
 print (list("VLZODTQHUXWSERMCFKNYIBJGP_A"))
 print(plausability(plain_text, krakatit_matrix))
+
+correctness = text_correctness(orig, decrypt(decrypted_key, text))
+
+print(f"final score : {correctness}")
 
