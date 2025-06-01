@@ -119,12 +119,12 @@ def break_encryption(text: str, probability_matrix: dict, attempts: int) -> list
 
 
         if score > current_score or random.uniform(0.0, 1.0) < (MUTATE_CHANCE * attempts_without_improvement):
-            if score > current_score:
-                attempts_without_improvement = 0
             
             current_key = new_key
             current_score = score
             key = new_key
+            attempts_without_improvement = 0
+
         else:
             attempts_without_improvement+=1
 

@@ -1,7 +1,7 @@
 from cipher.substitute_cypher import break_encryption, decrypt
 
 
-def process_file(path: str, probability_matrix: dict):
+def process_file(path: str, probability_matrix: dict, attempts_per_file: int):
     file = open(path)
     contents = file.read()
     file.close()
@@ -10,7 +10,7 @@ def process_file(path: str, probability_matrix: dict):
 
     print(f"Processing file {file_id}")
 
-    key = break_encryption(contents, probability_matrix, 40000)
+    key = break_encryption(contents, probability_matrix, attempts_per_file)
     plain_text = decrypt(key, contents)
 
     save_decrypted("./output/", key, plain_text, file_id)

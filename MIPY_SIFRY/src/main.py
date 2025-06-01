@@ -15,6 +15,6 @@ files = listdir("./Testovaci_soubory")
 for file_index in range(0, len(files)):
     print(f"Total progress {file_index} / {len(files)}")
     file = "./Testovaci_soubory/" + files[file_index]
-    process_file(file, krakatit_matrix)
+    process_file(file, krakatit_matrix, 20000)
 
 print("Processing finished!")
