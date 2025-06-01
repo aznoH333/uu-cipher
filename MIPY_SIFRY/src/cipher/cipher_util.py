@@ -1,6 +1,7 @@
 import math
 import random
 from random import randrange
+
     
 BASE_ALPHABET = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "_"]
 CHARACTER_CONVERION_TABLE = {
