@@ -1,30 +1,8 @@
-from cipher.cipher_util import BASE_ALPHABET, create_bygram_matrix, decrypt, encrypt, generate_random_key, get_bygrams, make_matrix_relative, plausability, shuffle_key, text_correctness
-from cipher.decrypt import break_encryption
-
-"""
-print("hello world")
-
-a = CipherUtil("VLZODTQHUXWSERMCFKNYIBJGP_A");
-print(a.key);
-print(a.DEFAULT_KEY);
-
-b = a.encrypt("_VOZEM_DO_NEHO_A_ZAS_MNE_BEZI_DO_CESTY__ZACHVELA_SE_TAK_KUDY_VPRAVO_NEBO_VLEVO_TEDY_JE_KONEC_PTAL_SE_TISE_POKYVLA_HLAVOU_TEDY_JE_KONEC_OTEVREL_DVIRKA_VYSKOCIL_Z_VOZU_A_POSTAVIL_SE_PRED_KOLA_JED_REKL_CHRAPTIVE_POJEDES_PRESE_MNE_UJELA_S_VOZEM_DVA_KROKY_ZPET_POJD_MUSIME_DAL_DOVEZU_TE_ASPON_BLIZ_K_HRANICIM_KAM_CHCES_ZPATKY_SKRIPEL_ZUBY_ZPATKY_S_TEBOU_SE_MNOU_NENI_ANI_DOPREDU_ANI_ZPATKY_COPAK_MI_NEROZUMIS_MUSIM_TO_UDELAT_ABYS_VIDEL_ABY_BYLO_JISTO_ZE_JSEM_TE_MELA_RADA_MYSLIS_ZE_BYCH_MOHLA_JESTE_JEDNOU_SLYSET_COS_MI_REKL_ZPATKY_NEMUZES_BUD_BYS_MUSEL_VYDAT_TO_CO_NECHCES_A_NESMIS_NEBO_BY_TE_ODVEZLI_A_JA__SPUSTILA_RUCE_DO_KLINA_VIDIS_I_NA_TO_JSEM_MYSLELA_ZE_BYCH_SLA_S_TEBOU_DOPREDU_DOVEDLA_BYCH_TO_DOVEDLA_BYCH_TO_JISTE_ALE__TY_JSI_TAM_NEKDE_ZASNOUBEN_JDI_K_NI_HLED_NIKDY_ME_NENAPADLO_PTAT_SE_TE_NA_TO_KDYZ_JE_CLOVEK_PRINCEZNA_MYSLI_SI_ZE_JE_NA_SVETE_SAM_MAS_JI_RAD_POHLEDL_NA_NI_UTRYZNENYMA_OCIMA_PRECE_JEN_NEDOVEDL_ZAPRIT__TAK_VIDIS_VYDECHLA_TY_NEUMIS_ANI_LHAT_TY_MILY_ALE_POCHOP_KDYZ_JSEM_SI_TO_PAK")
-
-print(b)
-print(a.decrypt(b))
-"""
+from cipher.bygram_matrix import create_bygram_matrix, get_bygrams, make_matrix_relative, plausability
+from cipher.cipher_util import text_correctness
+from cipher.substitute_cypher import break_encryption, decrypt
 
 
-"""
-# train probabilities
-krakatit = open("./Krakatit.txt").read()
-
-probability_matrix = ProbabilityMatrix.from_text(krakatit, True)
-
-print(probability_matrix.calculate_text_score("_VOZEM_DO_NEHO_A_ZAS_MNE_BEZI_DO_CESTY__ZACHVELA_SE_TAK_KUDY_VPRAVO"))
-print(probability_matrix.calculate_text_score("PENIS"))
-print(probability_matrix.calculate_text_score("ASDYAWYUGYUADYGUWYGUUYADGSYUGDAUGYDFYAWYUADS_AD_ADADSADADADADASDASD"))
-"""
 krakatit = open("./Krakatit.txt").read()
 
 

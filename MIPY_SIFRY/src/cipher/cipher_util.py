@@ -28,22 +28,27 @@ CHARACTER_CONVERION_TABLE = {
 
 
 
-def encrypt(key, text):
-    out = ""
-    for char in text.upper():
-        out += key[BASE_ALPHABET.index(char)]
-        
-    return out
 
-def decrypt(key, text):
-    
-    out = ""
-    for char in text.upper():
-        out += BASE_ALPHABET[key.index(char)]
-        
-    return out
 
-def sanitize_text(text):
+def sanitize_text(text: str) -> str:
+    """
+    Cleans and prepares a given text for encryption or decryption.
+
+    This function processes the input text to ensure that it contains only 
+    characters from the defined BASE_ALPHABET. It converts all characters to 
+    uppercase and replaces newline characters with underscores (to avoid accidental word merging). 
+    Any characters not found in the BASE_ALPHABET are either converted using the 
+    CHARACTER_CONVERSION_TABLE or discarded if they cannot be converted.
+
+    Parameters:
+        text (str): The input text that needs to be sanitized. This can include 
+                    any characters, including special characters and whitespace.
+
+    Returns:
+        str: A sanitized string containing only characters from BASE_ALPHABET. 
+             All characters are uppercase, and any unrecognized characters are 
+             removed. Newline characters are replaced with underscores.
+    """
     decoded = str(text.upper().replace("\n", "_"))
     out = ""
     for i in range(0, len(decoded)):
@@ -53,8 +58,6 @@ def sanitize_text(text):
         if char in CHARACTER_CONVERION_TABLE:
             char = CHARACTER_CONVERION_TABLE[char]
             
-
-
         #check if is part of the alphabet
         if char in BASE_ALPHABET:
             out += char
@@ -63,7 +66,19 @@ def sanitize_text(text):
     return out
 
 
-def generate_random_key():
+def generate_random_key() -> list:
+    """
+    Generates a randomized permutation of the base alphabet.
+
+    This function creates a new list containing a shuffled version of the 
+    characters defined in BASE_ALPHABET. The resulting list can be used as 
+    a key for encryption or decryption processes.
+
+    Returns:
+        list: A list containing a randomized iteration of the characters 
+              from BASE_ALPHABET. The order of characters in the list is 
+              shuffled, providing a unique key for encryption or decryption.
+    """
     output = []
 
     for char in BASE_ALPHABET:
@@ -73,7 +88,22 @@ def generate_random_key():
 
     return output
 
-def shuffle_key(key):
+def shuffle_key(key: list) -> list:
+    """
+    Swaps two random letters in a given key.
+
+    This function takes a list representing a key (a randomized permutation 
+    of the base alphabet) and randomly selects two distinct positions within 
+    the list. It then swaps the characters at these positions.
+
+    Parameters:
+        key (list): A list of characters representing the key to be shuffled. 
+                    The list should contain characters from BASE_ALPHABET.
+
+    Returns:
+        list: The modified key with two characters swapped. The original 
+              key is altered in place and returned.
+    """
     random_1 = randrange(0, len(BASE_ALPHABET))
     random_2 = randrange(0, len(BASE_ALPHABET) - 1)
 
@@ -88,58 +118,27 @@ def shuffle_key(key):
     return key
 
 
-def get_bygrams(text):
-    text = sanitize_text(text)
-    
-    out = []
 
-    for i in range(0, len(text) - 1):
-        out.append(text[i] + text[i+1])
+def text_correctness(original_text: str, decrypted_text: str) -> float:
+    """
+    Compares two texts and returns a "correctness" score based on character differences.
 
-    return out
+    This function evaluates how closely the decrypted text matches the 
+    original text by counting the number of differing characters. The 
+    result is expressed as a percentage, where a score of 1 indicates 
+    perfect correctness (no differences) and a score of 0 indicates 
+    complete divergence (all characters differ). This function is primarily 
+    intended for testing purposes to assess the accuracy of the decryption 
+    process.
 
+    Parameters:
+        original_text (str): The original text that serves as the reference for comparison.
+        decrypted_text (str): The text produced by the decryption process that is being evaluated.
 
-def create_bygram_matrix(bygrams):
-    out = {}
-
-    for i in BASE_ALPHABET:
-        for j in BASE_ALPHABET:
-            out[i + j] = 0
-
-    
-    for bygram in bygrams:
-        out[bygram] += 1
-
-    for key in out.keys():
-        if out[key] == 0:
-            out[key] = 1
-
-    return out
-
-def make_matrix_relative(matrix):
-    total_element_count = 0
-    for key in matrix.keys():        
-        total_element_count += matrix[key] - 1
-    for key in matrix.keys():
-        matrix[key] /= total_element_count
-
-
-
-    return matrix
-
-
-def plausability(text, relative_matrix):
-    text_matrix = create_bygram_matrix(get_bygrams(text))
-
-    outcome = 0
-    for i in BASE_ALPHABET:
-        for j in BASE_ALPHABET:
-            outcome += math.log(relative_matrix[i + j]) * text_matrix[i + j]
-
-    return outcome
-
-
-def text_correctness(original_text, decrypted_text):
+    Returns:
+        float: A correctness score ranging from 0 to 1, where 1 indicates 
+               that the texts are identical and 0 indicates that they are completely different.
+    """
     output = 0
     
     for i in range(0, len(original_text)):

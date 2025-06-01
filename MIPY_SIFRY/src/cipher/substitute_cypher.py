@@ -1,8 +1,26 @@
 import random
-from cipher.cipher_util import decrypt, generate_random_key, plausability, shuffle_key
+
+from cipher.bygram_matrix import plausability
+from cipher.cipher_util import BASE_ALPHABET, generate_random_key, shuffle_key
 
 
 IGNORE_CHANCE = 0.0001
+
+def encrypt(key, text):
+    out = ""
+    for char in text.upper():
+        out += key[BASE_ALPHABET.index(char)]
+        
+    return out
+
+def decrypt(key, text):
+    
+    out = ""
+    for char in text.upper():
+        out += BASE_ALPHABET[key.index(char)]
+        
+    return out
+
 
 def break_encryption(text, probability_matrix, attempts):
     
