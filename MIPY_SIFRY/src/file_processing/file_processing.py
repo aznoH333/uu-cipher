@@ -1,4 +1,4 @@
-from cipher.substitute_cypher import break_encryption, decrypt
+from cipher.substitute_cipher import break_encryption, decrypt
 
 
 def process_file(path: str, probability_matrix: dict, attempts_per_file: int):

@@ -1,6 +1,6 @@
 from cipher.bygram_matrix import create_bygram_matrix, get_bygrams, make_matrix_relative, plausability
 from cipher.cipher_util import text_correctness
-from cipher.substitute_cypher import break_encryption, decrypt
+from cipher.substitute_cipher import break_encryption, decrypt
 
 
 krakatit_file = open("./Krakatit.txt")
