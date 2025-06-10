@@ -1,5 +1,5 @@
 # create matrix
-from cipher.bygram_matrix import create_bygram_matrix, get_bygrams, make_matrix_relative
+from cipher.bygram_matrix import create_bygram_matrix, get_bygrams
 
 
 krakatit_file = open("./Krakatit.txt")

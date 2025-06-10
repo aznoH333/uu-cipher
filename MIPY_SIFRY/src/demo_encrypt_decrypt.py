@@ -5,7 +5,7 @@ plain_text = sanitize_text("The quick brown fox jumps over the lazy dog")
 key = generate_random_key()
 key_str = "".join(key)
 
-print(f"Original text : plain_text")
+print(f"Original text : {plain_text}")
 print(f"Cypher key = {key_str}")
 
 encrypted = encrypt(key, plain_text)
