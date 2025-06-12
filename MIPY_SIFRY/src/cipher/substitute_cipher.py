@@ -80,22 +80,6 @@ def break_encryption(text: str, probability_matrix: dict, attempts: int) -> list
     """
     key = generate_random_key()
 
-    """
-    DEVELOPER NOTE: 
-    I have made some minor adjustments to the suggested algorithim.
-    1. The best overall key is stored and returned at the end instead of the current key.
-    This is mentionied in the assignemt just not implemented in the pseudo code. It made sense to me so i implemented it.
-
-    2. The chance to accept a worse key scales with the number of passed iterations without improvement.
-    I made this change to make the algorithim more likely to explore new combinations.
-
-    Do these changes improve the result? 
-    
-    idk ¯\_(ツ)_/¯. probably? maybe? 
-    it seems that they do.
-    
-    I have tried to run this many times. Usually with 20000 attempts it gets to 100%, but I have had a few instances where it got to only 90%
-    """
 
     current_key = key.copy()
     current_score = plausability(decrypt(current_key, text), probability_matrix)

@@ -1,0 +1,9 @@
+Knihovna cipher poskytuje metody pro šifrování a dešifrování textu pomocí substituční šifry. 
+Také nabízí metody pro prolomení substituční šifry a generování klíčů. Celá knihovna je implementována formou statických metod. 
+Jako zdroj bigramů jsem vybral knihu Krakatit (kopie v adresáři src). Úspěšnost prolomení závisí hodně na šifrovaném textu. 
+S 20 tisíci pokusy se u vzorového textu (text_1000_sample_1_ciphertext.txt) většinou dosáhne 100% úspěšnosti prolomení. 
+V některých případech, při špatném štěstí, se úspěšnost pohybuje kolem 90%. 
+U jiných vzorů byla úspěšnost nižší, většinou bylo dešifrováno jedno písmeno chybně. 
+Proto jsem pro finální dešifrování použil 40 tisíc pokusů pro jistotu. 
+Další faktor, který má velký dopad na kvalitu prolomení, je délka textu. 
+Obecně platí, že delší texty mají větší úspěšnost.
